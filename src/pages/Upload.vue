@@ -72,6 +72,7 @@
 <script>
 import { mapState } from "vuex";
 import { Message } from "element-ui";
+import { nanoid } from "nanoid";
 export default {
   name: "Upload",
   data() {
@@ -121,7 +122,14 @@ export default {
             type: "success",
             message: "上传成功！",
           });
-          this.$store.dispatch("book/addBookList", this.uploadForm);
+          /**
+            向后端传入新增图书信息  
+            对象：
+                const newData = {
+                bookId: nanoid(),
+                ...uploadForm
+            };
+          */
         } else {
           Message({
             type: "error",
