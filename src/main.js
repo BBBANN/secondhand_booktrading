@@ -6,7 +6,7 @@ import store from './store'
 import {
   Card, Form, FormItem, Input, Button, Row, Col, Container, Header, Aside, Main, Menu,
   MenuItem, MenuItemGroup, Submenu, Carousel, CarouselItem, Divider, Step, Steps, Table, TableColumn, Drawer, Select, Option,
-  Pagination
+  Pagination, Radio, RadioGroup, DatePicker
 } from 'element-ui'
 
 Vue.component(Card.name, Card)
@@ -35,6 +35,9 @@ Vue.component(Drawer.name, Drawer)
 Vue.component(Select.name, Select)
 Vue.component(Option.name, Option)
 Vue.component(Pagination.name, Pagination)
+Vue.component(Radio.name, Radio)
+Vue.component(RadioGroup.name, RadioGroup)
+Vue.component(DatePicker.name, DatePicker)
 
 Vue.use(VueRouter)
 
