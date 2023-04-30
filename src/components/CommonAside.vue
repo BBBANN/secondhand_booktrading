@@ -29,7 +29,9 @@
               :key="subItem.name"
               :index="subItem.name"
               @click="handleMenu(subItem)"
-              >{{ subItem.label }}</el-menu-item
+            >
+              <i :class="`el-icon-${subItem.icon}`"></i>
+              <span>{{ subItem.label }}</span></el-menu-item
             >
           </el-menu-item-group>
         </el-submenu>
@@ -78,13 +80,19 @@ export default {
               path: "/addbook",
               name: "addbook",
               label: "添加图书种类",
-              icon: "setting",
+              icon: "plus",
             },
             {
               path: "/manageuser",
               name: "manageuser",
               label: "用户管理",
-              icon: "setting",
+              icon: "s-custom",
+            },
+            {
+              path: "/viewfeedback",
+              name: "viewfeedback",
+              label: "反馈信息",
+              icon: "s-comment",
             },
           ],
         },

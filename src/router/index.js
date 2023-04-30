@@ -7,6 +7,7 @@ import Upload from '../pages/Upload';
 import ManageUser from '../pages/ManageUser';
 import AddBook from '../pages/AddBook';
 import Complaint from '../pages/Complaint';
+import ViewFeedback from '../pages/ViewFeedback';
 
 export default new VueRouter({
     routes: [
@@ -50,7 +51,11 @@ export default new VueRouter({
                     path: '/complaint',
                     name: "complaint",
                     component: Complaint
-
+                },
+                {
+                    path: '/viewfeedback',
+                    name: "viewfeedback",
+                    component: ViewFeedback
                 },
 
             ],
