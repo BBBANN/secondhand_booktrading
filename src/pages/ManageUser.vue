@@ -53,6 +53,18 @@
     >
       <el-table-column prop="userId" label="用户id"> </el-table-column>
       <el-table-column prop="userName" label="用户名"> </el-table-column>
+      <el-table-column label="操作" width="300px">
+        <template slot-scope="scope">
+          <el-button
+            class="deleteBtn"
+            size="mini"
+            type="danger"
+            plain
+            @click="handleDelete(scope)"
+            >删除</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
     <!-- 表格 end -->
     <!-- 分页 start -->
@@ -170,6 +182,15 @@ export default {
       this.tempUserList = this.userList.slice();
       this.getData();
     },
+    handleDelete(scope) {
+      /**
+       * 向后端发送删除用户信息
+       */
+      //以下为临时展示用
+      this.tempUserList = this.tempUserList.filter(item => {
+        return item.userId !== scope.row.userId;
+      })
+    },
     handleSearch() {
       this.drawer = true;
     },
@@ -249,6 +270,9 @@ export default {
   }
   .el-table {
     margin-top: 30px;
+  }
+  .deleteBtn {
+    margin-left: 10px;
   }
   .submitSearch {
     display: flex;

@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { nanoid } from "nanoid";
 import { Message } from 'element-ui';
 
 export default {
