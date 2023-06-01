@@ -1,7 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        isAdmin: true,
+        isAdmin: false,
         isCollapse: false,
     },
     mutations: {
