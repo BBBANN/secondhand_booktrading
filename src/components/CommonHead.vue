@@ -28,11 +28,7 @@ export default {
     handleCollapse() {
       this.$store.commit("tab/CHANGE_ISCOLLAPSE");
     },
-    // --------------------------等待后端----------------------------------------
     exitLogin() {
-      /**
-       * cleartoken section
-       */
       this.$router.push({
         name: "login",
       });

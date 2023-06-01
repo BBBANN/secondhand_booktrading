@@ -42,8 +42,8 @@
         <el-select v-model="uploadForm.bookType" placeholder="请选择图书类型">
           <el-option
             v-for="item in bookTypeList"
-            :key="item"
-            :label="item"
+            :key="item.bookTypeId"
+            :label="item.typeName"
             :value="item"
           ></el-option>
         </el-select>
@@ -135,6 +135,9 @@ export default {
       this.uploadForm = {};
     },
   },
+  mounted() {
+    this.$store.dispatch("book/getBookType");
+  }
 };
 </script>
 

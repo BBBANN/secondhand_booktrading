@@ -18,7 +18,7 @@ export default new VueRouter({
         },
         {
             path: '/',
-            redirect: '/home',
+            redirect: '/login',
             name: 'main',
             component: Main,
             children: [

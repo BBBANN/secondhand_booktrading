@@ -7,7 +7,7 @@
         <div slot="header" class="clearfix">
           <h3>当前存在的图书类型</h3>
         </div>
-        <p v-for="item in bookTypeList" :key="item">{{ item }}</p>
+        <p v-for="item in bookTypeList" :key="item.bookTypeId">{{ item.typeName }}</p>
       </el-card>
     </div>
     <el-divider></el-divider>
@@ -84,9 +84,8 @@ export default {
     },
   },
   mounted() {
-    // 让 store 向后端获取数据
-    this.$store.dispatch("book/addBookType", this.addbookForm.newBookType);
-  },
+    this.$store.dispatch("book/getBookType");
+  }
 };
 </script>
 

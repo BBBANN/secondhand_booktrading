@@ -16,7 +16,7 @@
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <div class="block">
-          <el-input v-model="complaintForm.email" placeholder="请输入上传日期">
+          <el-input v-model="complaintForm.email" placeholder="请输入邮箱">
           </el-input>
         </div>
       </el-form-item>
@@ -26,9 +26,9 @@
           placeholder="请输入您的手机号码"
         ></el-input>
       </el-form-item>
-      <el-form-item label="反馈类型" prop="complaintType">
+      <el-form-item label="反馈类型" prop="feedbackType">
         <el-select
-          v-model="complaintForm.complaintType"
+          v-model="complaintForm.feedbackType"
           placeholder="请选择反馈类型"
         >
           <el-option label="功能建议" value="功能建议"></el-option>
@@ -36,10 +36,10 @@
           <el-option label="图书缺陷" value="图书缺陷"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="问题描述" prop="problemDesc">
+      <el-form-item label="问题描述" prop="content">
         <el-input
           type="textarea"
-          v-model="complaintForm.problemDesc"
+          v-model="complaintForm.content"
           placeholder="请描述您的建议或所遇到的问题"
         ></el-input>
       </el-form-item>
@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import { Message } from 'element-ui';
-
+import { Message } from "element-ui";
+import { addFeedBack } from "../api";
 export default {
   name: "Complaint",
   data() {
@@ -62,21 +62,21 @@ export default {
         userName: "",
         email: "",
         phoneNumber: "",
-        complaintType: "",
-        problemDesc: "",
+        feedbackType: "",
+        content: "",
       },
       rules: {
         userName: [
           { required: true, message: "请输入您的用户名", trigger: "blur" },
         ],
-        email: [{ required: true, message: "请输入上传日期", trigger: "blur" }],
+        email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
         phoneNumber: [
           { required: true, message: "请输入图书名称", trigger: "blur" },
         ],
-        complaintType: [
+        feedbackType: [
           { required: true, message: "请输入您的定价", trigger: "blur" },
         ],
-        problemDesc: [
+        content: [
           { required: true, message: "请输入图书作者", trigger: "blur" },
         ],
       },
@@ -90,13 +90,7 @@ export default {
             type: "success",
             message: "反馈成功！",
           });
-          /**
-           *  向后端添加投诉信息
-           * newData = {
-           *  complaintId: nanoid(),
-           *  ...complaintForm
-           * }
-           */
+          addFeedBack(this.complaintForm);
         } else {
           Message({
             type: "error",
@@ -152,5 +146,4 @@ export default {
     }
   }
 }
-
 </style>

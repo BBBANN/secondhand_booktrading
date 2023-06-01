@@ -38,7 +38,7 @@
             >
               <el-option
                 v-for="item in feedbackTypeList"
-                :key="item"
+                :key="item.feedbackId"
                 :label="item"
                 :value="item"
               ></el-option>
@@ -62,7 +62,7 @@
     >
       <el-table-column prop="userName" label="用户名"> </el-table-column>
       <el-table-column prop="feedbackType" label="反馈类型"> </el-table-column>
-      <el-table-column prop="desc" label="问题描述"> </el-table-column>
+      <el-table-column prop="content" label="问题描述"> </el-table-column>
     </el-table>
     <!-- 表格 end -->
     <!-- 分页 start -->
@@ -83,6 +83,8 @@
 
 <script>
 import { Message } from "element-ui";
+import { getFeedBackList } from "../api";
+
 export default {
   name: "ManageUser",
   data() {
@@ -92,139 +94,13 @@ export default {
       searchForm: {
         userName: "",
         feedbackType: "",
-        desc: "",
+        content: "",
       },
       tempFeedbackList: [],
       currentPage: 1,
       pageSize: 15,
       feedbackTypeList: ["功能建议", "用户体验", "图书缺陷"],
-      feedbackList: [
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "2",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "用户体验",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-        {
-          userName: "1",
-          feedbackType: "功能建议",
-          desc: "建议取消东南大学早操",
-        },
-      ],
+      feedbackList: [],
     };
   },
   methods: {
@@ -235,7 +111,7 @@ export default {
       this.searchForm = {
         userName: "",
         feedbackType: "",
-        desc: "",
+        content: "",
       };
       this.tempFeedbackList = this.feedbackList.slice();
       this.getData();
@@ -256,7 +132,7 @@ export default {
       this.searchForm = {
         userName: "",
         feedbackType: "",
-        desc: "",
+        content: "",
       };
       this.drawer = false;
     },
@@ -288,11 +164,12 @@ export default {
     },
   },
   mounted() {
-    /**
-     * 先从后端获取用户列表
-     */
-    this.tempFeedbackList = this.feedbackList.slice();
-    this.getData();
+    getFeedBackList().then((val) => {
+      this.feedbackList = val.data;
+      this.tempFeedbackList = val.data;
+      this.getData();
+    });
+    this.feedbackList.slice();
   },
 };
 </script>

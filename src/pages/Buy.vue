@@ -43,8 +43,8 @@
             >
               <el-option
                 v-for="item in bookTypeList"
-                :key="item"
-                :label="item"
+                :key="item.bookTypeId"
+                :label="item.typeName"
                 :value="item"
               ></el-option>
             </el-select>
@@ -161,6 +161,8 @@
 <script>
 import { Message } from "element-ui";
 import { mapState } from "vuex";
+import { getBookList } from "../api";
+
 export default {
   name: "Buy",
   data() {
@@ -204,6 +206,13 @@ export default {
     confirmBuy() {
       if (this.address !== "") {
         this.dialogVisible = false;
+        // 删除被购买的图书
+        this.$store.dispatch("book/deleteBook", this.currentRow.bookId);
+        // 重新获取图书列表
+        this.$store.dispatch("book/getBooks");
+        this.tempBookList = this.bookList;
+        this.getData();
+
         Message({
           type: "success",
           message: "交易完成！",
@@ -286,10 +295,12 @@ export default {
     ...mapState("book", ["bookTypeList", "bookList"]),
   },
   mounted() {
-    // 使 store 向后端获取数据
-    this.$store.dispatch("book/addBook", "");
-    this.tempBookList = this.bookList.slice();
-    this.getData();
+    this.$store.dispatch("book/getBooks");
+    getBookList().then((val) => {
+      const temp = val.data;
+      this.tempBookList = temp;
+      this.getData();
+    });
   },
 };
 </script>

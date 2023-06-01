@@ -53,6 +53,7 @@
     >
       <el-table-column prop="userId" label="用户id"> </el-table-column>
       <el-table-column prop="userName" label="用户名"> </el-table-column>
+      <el-table-column prop="isAdmin" label="是否是管理员"> </el-table-column>
       <el-table-column label="操作" width="300px">
         <template slot-scope="scope">
           <el-button
@@ -85,6 +86,7 @@
 
 <script>
 import { Message } from "element-ui";
+import { getUserList, deleteUser } from "../api";
 export default {
   name: "ManageUser",
   data() {
@@ -94,6 +96,7 @@ export default {
       searchForm: {
         userName: "",
         userId: "",
+        isAdmin: "",
       },
       tempUserList: [],
       currentPage: 1,
@@ -102,75 +105,37 @@ export default {
         {
           userName: "1",
           userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 1,
-        },
-        {
-          userName: "1",
-          userId: 3,
+          isAdmin: "是",
         },
         {
           userName: "1",
           userId: 5,
+          isAdmin: "否",
         },
         {
           userName: "1",
           userId: 5,
+          isAdmin: true,
         },
         {
           userName: "1",
           userId: 5,
+          isAdmin: true,
         },
         {
           userName: "1",
           userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
-        },
-        {
-          userName: "1",
-          userId: 5,
+          isAdmin: true,
         },
       ],
     };
   },
   methods: {
+    getUsers() {
+      getUserList().then((val) => {
+        this.userList = val.data;
+      });
+    },
     handleClose(done) {
       done();
     },
@@ -178,18 +143,16 @@ export default {
       this.searchForm = {
         userId: "",
         userName: "",
+        isAdmin: "",
       };
       this.tempUserList = this.userList.slice();
       this.getData();
     },
     handleDelete(scope) {
-      /**
-       * 向后端发送删除用户信息
-       */
-      //以下为临时展示用
-      this.tempUserList = this.tempUserList.filter(item => {
-        return item.userId !== scope.row.userId;
-      })
+      deleteUser(scope.row.userId);
+      this.getUsers();
+      this.tempUserList = this.userList;
+      this.getData();
     },
     handleSearch() {
       this.drawer = true;
@@ -207,6 +170,7 @@ export default {
       this.searchForm = {
         userId: "",
         userName: "",
+        isAdmin: "",
       };
       this.drawer = false;
     },
@@ -229,7 +193,9 @@ export default {
             (this.searchForm.userName == "" ||
               item.userName == this.searchForm.userName) &&
             (this.searchForm.userId == "" ||
-              item.userId == this.searchForm.userId);
+              item.userId == this.searchForm.userId) &&
+            (this.searchForm.isAdmin == "" ||
+              item.isAdmin == this.searchForm.isAdmin);
           if (contion) {
             return item;
           }
@@ -238,11 +204,11 @@ export default {
     },
   },
   mounted() {
-    /**
-     * 先从后端获取用户列表
-     */
-    this.tempUserList = this.userList.slice();
-    this.getData();
+    getUserList().then((val) => {
+      this.userList = val.data;
+      this.tempUserList = val.data;
+      this.getData();
+    });
   },
 };
 </script>
