@@ -1,7 +1,7 @@
 <template>
   <div id="upload">
     <h1><i class="el-icon-upload"></i> 上传图书</h1>
-    <img class="uploadImg" src="../assets/图书上传.png" />
+    <img class="uploadImg" src="../assets/upload2.png" />
     <el-form
       ref="uploadForm"
       :model="uploadForm"

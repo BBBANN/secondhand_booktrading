@@ -1,7 +1,7 @@
 <template>
   <div id="addbook">
     <h1><i class="el-icon-plus"></i> 添加图书种类</h1>
-    <img class="addbookImg" src="../assets/添加图书类型.png" />
+    <img class="addbookImg" src="../assets/addbooktype.png" />
     <div class="currentTypeList">
       <el-card shadow="never">
         <div slot="header" class="clearfix">

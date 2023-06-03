@@ -152,7 +152,7 @@
       </span>
       <el-divider></el-divider>
       <h3>在线支付</h3>
-      <img class="QRcode" src="../assets/二维码.png" />
+      <img class="QRcode" src="../assets/qrcode.png" />
     </el-dialog>
     <!-- 支付对话框 end -->
   </div>

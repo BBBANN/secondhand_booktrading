@@ -1,7 +1,7 @@
 <template>
   <div id="complaint">
     <h1><i class="el-icon-warning"></i> 向上申诉</h1>
-    <img class="complaintImg" src="../assets/反馈.png" />
+    <img class="complaintImg" src="../assets/feedback.png" />
     <el-form
       ref="complaintForm"
       :model="complaintForm"
