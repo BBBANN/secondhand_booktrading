@@ -6,7 +6,7 @@ const config = {
     },
 };
 
-const baseUrl = "60.204.134.18:5050";
+const baseUrl = "121.37.152.108:5050";
 
 // 登录
 export const validateLogin = (data) => {
